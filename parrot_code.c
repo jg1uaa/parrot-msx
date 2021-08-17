@@ -7,7 +7,6 @@ extern const unsigned char *parrot_data[];
 extern const unsigned char parrot_palette[];
 
 #define DATA_SIZE	768
-#define PLANE		10
 
 #define DELAY		500
 
@@ -72,10 +71,12 @@ static void set_palette(const unsigned char *palette)
 static void do_disp(void)
 {
 	int i;
+	const unsigned char **p = parrot_data;
 
-	for (i = 0; i < PLANE; i++) {
-		vwrite(parrot_data[i], PATTERN_NAME, DATA_SIZE);
+	while (1) {
+		vwrite(*p++, PATTERN_NAME, DATA_SIZE);
 		dummy_loop(DELAY);
+		if (*p == (void *)0) p = parrot_data;
 	}
 }
 

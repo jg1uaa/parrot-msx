@@ -142,6 +142,7 @@ int main(int argc, char *argv[])
 	printf("const unsigned char *parrot_data[] = {\n");
 	for (i = 1; i < argc; i++)
 		printf("\tparrot_data%02d,\n", i - 1);
+	printf("\t(void *)0,\n");
 	printf("};\n\n");
 
 	printf("const unsigned char parrot_palette[] = {\n");
